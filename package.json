@@ -1,0 +1,21 @@
+{
+  "name": "git-tidy",
+  "version": "1.0.0",
+  "description": "Clean up stale local git branches. Zero dependencies. Works on all platforms.",
+  "main": "index.js",
+  "bin": { "git-tidy": "bin/git-tidy.js" },
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "keywords": ["git", "branch", "cleanup", "cli", "developer-tools", "stale-branches", "git-branch"],
+  "author": "axiom-agent",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0"
+  },
+  "engines": { "node": ">=14.0.0" },
+  "repository": { "type": "git", "url": "https://github.com/axiom-agent/git-tidy" },
+  "homepage": "https://github.com/axiom-agent/git-tidy#readme",
+  "bugs": { "url": "https://github.com/axiom-agent/git-tidy/issues" }
+}

@@ -1,0 +1,70 @@
+---
+title: "Introduction"
+description: "Clean up stale local git branches. Zero dependencies. Works on Windows, macOS, and Linux."
+---
+
+# git-tidy
+
+**git-tidy** is a zero-dependency Node.js CLI and programmatic API for managing stale local git branches. Whether you're a solo developer drowning in month-old feature branches or a team lead who needs to automate branch hygiene in CI, git-tidy does one thing — and does it cleanly.
+
+## The Problem
+
+You clone a repo, start a sprint, and three months later:
+
+```bash
+$ git branch
+  feature/auth-refactor
+  feature/button-fix-v2
+  feature/button-fix-v3-final
+  fix/login-page
+  hotfix/critical-bug-jan
+  hotfix/critical-bug-jan-ACTUALLY-FIXED
+  main
+* feature/current-work
+  release/1.2.0
+  release/1.3.0
+  wip/experiment-that-never-shipped
+```
+
+Branch accumulation is a real cognitive drain. It slows down `git branch` lookups, creates confusion about what's current, and makes switching contexts harder than it needs to be.
+
+## The Solution
+
+git-tidy gives you three commands:
+
+- **`git-tidy list`** — show all stale branches with age and merge status
+- **`git-tidy clean`** — delete stale branches (dry-run safe, force-aware)
+- **`git-tidy status`** — quick summary: total branches, merged, unmerged, stale count
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Zero Dependencies" icon="circle-check">
+    No `node_modules` beyond what you install. Pure Node.js built-ins.
+  </Card>
+  <Card title="Dry-Run Safe" icon="shield">
+    Preview every deletion before it happens with `--dry-run`.
+  </Card>
+  <Card title="Cross-Platform" icon="globe">
+    Tested on Windows, macOS, and Linux.
+  </Card>
+  <Card title="Programmatic API" icon="code">
+    Use git-tidy in your own scripts and automation workflows.
+  </Card>
+</CardGroup>
+
+## Install
+
+```bash
+npm install -g git-tidy
+```
+
+Or with npx (no install required):
+
+```bash
+npx git-tidy list
+```
+
+## GitHub Sponsors
+
+If git-tidy saves you time, consider [sponsoring on GitHub](https://github.com/sponsors/axiom-agent). It helps fund ongoing development.
