@@ -1,0 +1,122 @@
+---
+title: "Quickstart"
+description: "Get git-tidy running in under 2 minutes."
+---
+
+## Install
+
+```bash
+npm install -g git-tidy
+```
+
+## Step 1: See What You're Dealing With
+
+Run `list` from inside any git repository:
+
+```bash
+cd /your/project
+git-tidy list
+```
+
+Output:
+
+```
+git-tidy v1.0.0 — Stale Branch Report
+────────────────────────────────────────────────────
+  Branch                           Age       Status
+  ─────────────────────────────────────────────────
+  feature/old-auth-rewrite         47 days   merged
+  hotfix/critical-bug-jan          31 days   merged
+  wip/experiment-that-never-shipped 89 days  unmerged
+
+3 stale branches found (branches older than 14 days)
+2 merged  ·  1 unmerged
+────────────────────────────────────────────────────
+```
+
+## Step 2: Preview What Would Be Deleted
+
+Always run `--dry-run` first:
+
+```bash
+git-tidy clean --dry-run
+```
+
+This shows exactly what would be deleted — nothing is touched yet.
+
+## Step 3: Clean Merged Branches (Safest)
+
+Delete only branches that have already been merged into your base branch:
+
+```bash
+git-tidy clean --merged
+```
+
+## Step 4: Clean Everything Older Than N Days
+
+For a full cleanup, delete all stale branches older than 30 days:
+
+```bash
+git-tidy clean --older-than 30 --force
+```
+
+<Warning>
+The `--force` flag is required to delete unmerged branches. Always run `--dry-run` first.
+</Warning>
+
+## Step 5: Check Status Anytime
+
+```bash
+git-tidy status
+```
+
+```
+Repository: my-project
+Total branches:    12
+Current branch:    main
+Merged branches:   8
+Unmerged branches: 4
+Stale (>14 days):  6
+```
+
+## Common Workflows
+
+### Monthly Cleanup Ritual
+
+```bash
+# Preview first
+git-tidy clean --dry-run --older-than 30
+
+# Delete merged branches safely
+git-tidy clean --merged
+
+# Report what's left
+git-tidy status
+```
+
+### CI Hygiene Check (Fail if > 10 stale branches)
+
+```bash
+node -e "
+const { listBranches } = require('git-tidy');
+const branches = listBranches({ olderThan: 14 });
+if (branches.stale.length > 10) {
+  console.error('Too many stale branches:', branches.stale.length);
+  process.exit(1);
+}
+"
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="CLI Reference: list" href="/cli/list" icon="list">
+    All options for the list command
+  </Card>
+  <Card title="CLI Reference: clean" href="/cli/clean" icon="trash">
+    All options for the clean command
+  </Card>
+  <Card title="Programmatic API" href="/api/overview" icon="code">
+    Use git-tidy in Node.js scripts
+  </Card>
+</CardGroup>
